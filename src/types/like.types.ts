@@ -1,0 +1,6 @@
+export interface likes {
+  _id: string;
+  user: string;
+  post: string;
+  createdAt: string;
+}
