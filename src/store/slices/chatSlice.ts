@@ -16,6 +16,7 @@ import {
 import type { ConversationType } from "../../types/Conversation";
 import type { MessageType } from "../../types/message.type";
 import { followUser, unfollowUser } from "./userSlice";
+import { useChat } from "../../hooks/useChat";
 
 // interface PaginatedMessagesResponse {
 //   messages: MessageType[];
@@ -366,6 +367,8 @@ const chatSlice = createSlice({
               new Date(b.createdAt).getTime()
           );
         }
+
+        // if(newMessage.receiverId) markAsRead(state.activeConversation._id, newMessage.receiverId._id, newMessage.senderId.userId);
       }
     },
     markConversationAsRead: (state, action) => {

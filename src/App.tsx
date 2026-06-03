@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { fetchProfile } from "./store/slices/authSlice";
 import { fetchUsers } from "./store/slices/userSlice"; 
 import { UserConnectionsPage } from "./pages/UserConnectionsPage";
-import NotFound from "./components/common/PageNotFound";
+import LandingPage from "./components/common/PageNotFound";
 import { AppLayout } from "./components/layout/AppLayout";
 import { AuthPage } from "./pages/AuthPage";
 import ChatPage from "./pages/ChatPage";
@@ -165,7 +165,8 @@ const AppRoutes = () => {
         />
       </Route>
 
-      <Route path="*" element={<NotFound />} />
+      <Route path="/" element={<LandingPage />} />
+      <Route path="*" element={<LandingPage />} />
     </Routes>
   );
 };
