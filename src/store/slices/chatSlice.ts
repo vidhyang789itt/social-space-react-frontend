@@ -16,7 +16,6 @@ import {
 import type { ConversationType } from "../../types/Conversation";
 import type { MessageType } from "../../types/message.type";
 import { followUser, unfollowUser } from "./userSlice";
-import { useChat } from "../../hooks/useChat";
 
 // interface PaginatedMessagesResponse {
 //   messages: MessageType[];
@@ -57,7 +56,7 @@ const initialState: ChatState = {
   error: null,
   unreadChatCount: 0,
   onlineUsersLastUpdate: 0,
-    messagesPagination: {
+  messagesPagination: {
     currentPage: 1,
     totalPages: 0,
     totalMessages: 0,
@@ -119,7 +118,7 @@ export const fetchMessages = createAsyncThunk(
     try {
       const response = await getMessagesApi(conversationId, page, limit);
       console.log(response);
-      
+
       return response;
     } catch (err: any) {
       console.error("❌ fetchMessages error:", err.message);
@@ -279,7 +278,7 @@ const chatSlice = createSlice({
       );
 
       console.log(convIndex);
-      
+
 
       if (convIndex !== -1) {
         const existingConv = state.conversations[convIndex];
@@ -532,7 +531,7 @@ const chatSlice = createSlice({
     },
     handleNewGroupReceived: (state, action) => {
       const newGroup = action.payload;
-      
+
       const groupExists = state.conversations.some(
         (conv) => conv._id === newGroup.groupId
       );
@@ -546,7 +545,7 @@ const chatSlice = createSlice({
           groupAdmin: newGroup.createdBy,
           groupImage: "",
           lastMessage: `${newGroup.groupName} group created`,
-          lastMessageSender : {
+          lastMessageSender: {
             _id: newGroup.createdBy,
             username: ""
           },
@@ -611,7 +610,7 @@ const chatSlice = createSlice({
             (c) => c._id === conversationId
           );
 
-          if(conversation){
+          if (conversation) {
             state.activeConversation = conversation;
           }
         }
@@ -641,7 +640,7 @@ const chatSlice = createSlice({
       })
       .addCase(fetchUnreadChatCount.fulfilled, (state, action) => {
         console.log(action.payload);
-        
+
         state.unreadChatCount = action.payload.count;
       })
       .addCase(createGroupChat.fulfilled, (state, action) => {
@@ -759,7 +758,7 @@ const chatSlice = createSlice({
       })
       .addCase(deleteMsgForMe.fulfilled, (state, action) => {
         console.log("✅ deleteMsgForMe: API Success", action.payload);
-        
+
         if (action.payload) {
           const messageId = action.payload;
           const msgIndex = state.activeMessages.findIndex(
